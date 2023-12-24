@@ -56,7 +56,7 @@ items = []
 for i in range(1,1000):
     file_name = f"zip_var_78/{i}.html"
     items.append(handle_file(file_name))
-json_items = json.dumps(items)
+json_items = json.dumps(items, ensure_ascii = False)
 with open("result.json", "w", encoding="utf-8") as result:
     result.write(json_items)
 
@@ -65,12 +65,21 @@ for i in range(1, 1000):
     file_name = f"zip_var_78/{i}.html"
     views.append(handle_file(file_name))
 views = sorted(views, key=lambda x: x['views'], reverse=True)
-json_views = json.dumps(views)
+json_views = json.dumps(views, ensure_ascii = False)
 with open("result_views.json", "w", encoding="utf-8") as result:
     result.write(json_views)
+
 
 print(len(items))
 num_stat = get_num("time_control", items)
 print(num_stat)
 city_freq = get_freq("city", items)
 print(city_freq)
+
+json_num_stat = json.dumps(num_stat, ensure_ascii = False)
+with open("json_num_stat.json", "w", encoding="utf-8") as result:
+    result.write(json_num_stat)
+
+json_city_freq = json.dumps(city_freq, ensure_ascii = False)
+with open("json_city_freq.json", "w", encoding="utf-8") as result:
+    result.write(json_city_freq)
